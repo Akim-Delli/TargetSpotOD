@@ -43,40 +43,40 @@
   					<br>
   					<br>
   					
-	  					<form role="form">
-						  	<div class="row form-group">
-						  		<div class="col-md-6">
-							    	<label for="exampleInputEmail1">Sation</label>
-							    	<input type="" class="form-control" id="station" placeholder="Enter Radio Sation">
-							    </div>
-						 	</div>
-						  	<div class="row form-group">
-						  		<div class="col-md-6">
-							    	<label for="exampleInputPassword1">Length</label>
-							    	<input type="number" class="form-control" id="audio-length" placeholder="Enter the Audio length in seconds">
-							    </div>
-						  	</div>
-					  		<div class="row">
-					  			<div class="col-md-6">
-					  				<button type="submit" class="btn btn-primary">Search</button>
-					  			</div>
-					  		</div>
-						</form>
+  					<form role="form" action="/request/station" method="post">
+					  	<div class="row form-group">
+					  		<div class="col-md-6">
+						    	<label for="station">Sation</label>
+						    	<input type="" class="form-control" id="station" name="station" placeholder="Enter Radio Sation">
+						    </div>
+					 	</div>
+					  	<div class="row form-group">
+					  		<div class="col-md-6">
+						    	<label for="length">Length</label>
+						    	<input type="number" class="form-control" id="audioLength" name="audioLength" placeholder="Enter the Audio length in seconds">
+						    </div>
+					  	</div>
+				  		<div class="row">
+				  			<div class="col-md-6">
+				  				<button type="submit" class="btn btn-primary">Search</button>
+				  			</div>
+				  		</div>
+					</form>
   				</div>
   				<div class="tab-pane fade" id="play">
   					<br>
   					<br>
-  					<form role="form">
+  					<form role="form" action="/play/ad" method="post">
 					  	<div class="row form-group">
 					  		<div class="col-md-6 col-md-offset-6">
 						    	<label for="exampleInputEmail1">Sation</label>
-						    	<input type="" class="form-control" id="station" placeholder="Enter Radio Sation">
+						    	<input type="" class="form-control" id="station" name="station" placeholder="Enter Radio Sation">
 						    </div>
 						 	</div>
 						  	<div class="row form-group">
 						  		<div class="col-md-6 col-md-offset-6">
 							    	<label for="audio file length">Length</label>
-							    	<input type="number" class="form-control" id="audio-length" placeholder="Enter the Audio length in seconds">
+							    	<input type="number" class="form-control" id="audioLength" name="audioLength" placeholder="Enter the Audio length in seconds">
 							    </div>
 						  	</div>
 					  		<div class="row">
