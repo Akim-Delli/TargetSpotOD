@@ -1,26 +1,67 @@
 /*
- * tstod.js
+ * tsod.js
  * Root namespace module
  */
 
- /* jslint parameters would go here  
+ /* jslint parameters would go here */ 
 
- */
- /*global $, tstod */
+ /*global $, tsod */
 
- var tstod = (function () {
- 	var initModule = function ( $container ) {
- 		$container.html(
- 			'<h1 style="display:inline-block; margin:25px;">' 
- 			   + 'hello world!'
- 			  + '</h1>'
- 			);
- 	};
 
- 	return { initModule : initModule };
- } ());
 
- $('#Tab a').click(function (e) {
-	e.preventDefault()
-	$(this).tab('show')
-})
+var tsod = (function () {
+ 	
+ 	// Maka a post reuest to the server and display a success or error message
+ 	var requestStation = function() {
+ 			// Ajax request to the Node.js server
+			$.post('/request/station', {
+				station:      $('#requestStationForm input[name=station]').val(),
+				audioLength:  $('#requestStationForm input[name=audioLength]').val(),
+			}, function(data){
+				// On Success push the list of audio files downloaded
+				console.log(data);
+				$("#success").html('<a class="close" data-dismiss="alert">×</a><strong>Successfully Downloaded the audio file(s) :</strong>' + formatlistAudioFiles(data));
+				$("#success").fadeIn();
+			}).error(function() {
+				// On error message
+				$("#error").html('<a class="close" data-dismiss="alert">×</a><strong>Sorry!</strong> Unable to fetch the station with the audio length requested.');
+				$("#error").fadeIn();
+			});
+			return false;
+		};
+
+	// format the list of audio files into a HTML list
+	var formatlistAudioFiles = function( AudioList) {
+		
+		var htmlList = "<br>";
+		if (AudioList !== "undefined") {
+			htmlList = htmlList + '<ul class="list-group">';
+			// Loop over the list of audio file name and create a new list item containing the file name
+			AudioList.forEach( function ( audio) {
+				if ( null !== audio) {
+					htmlList = htmlList + '<li class="list-group-item">' + audio + '</li>';
+				}
+				htmlList = htmlList + "</ul>";
+			})
+		}
+		return htmlList;
+	};
+
+ 	return { requestStation: requestStation };
+} ());
+
+// DOM click events Handlers
+$(function(){
+	// Hide the Success and error messages container at loading.
+	$("#error").hide();
+	$("#success").hide();
+
+	$('button#submitStation').click(function (e) {
+		$("#error").hide();
+		$("#success").hide();
+		e.preventDefault();
+		tsod.requestStation();
+		return false;
+	});
+});
+ 

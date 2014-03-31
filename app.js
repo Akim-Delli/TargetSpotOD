@@ -36,10 +36,12 @@ app.configure( 'production', function() {
 	app.use( express.errorHandler() );
 });
 
+// home route
 app.get('/', function(request, response) {
 	response.redirect( '/tsod.html');
 });
 
+// redirect to home
 app.get('/targetspot', function(request, response) {
 	response.redirect( '/tsod.html');
 });
@@ -47,19 +49,20 @@ app.get('/targetspot', function(request, response) {
 app.post('/request/station', function (req, res) {
 	var station = req.body.station,
 	    length  = req.body.audioLength;
-	if (null == station ) {
+	if ( null == station ) {
 		res.send(400);
 		return;
 	}
-
-	models.Station.fetchByStationAndLength(station, length, function onFetchDone(err, audio) {
-		if (err || audio.length === 0) {
+	// delegate to process the request to the Station object (in models)
+	models.Station.fetchByStationAndLength(station, length, function onFetchDone(err, audioInfo) {
+		if (err || typeof audioInfo == "undefined" || audioInfo.length == 0) {
 			res.send(404);
 		} else {
-			res.send(audio);
+			//Send back to the Client a Json string containing duration and mp3 file names
+			res.writeHead( 200, {"Content-Type": "text/x-json"} );
+        	res.end( JSON.stringify(audioInfo) );
 		}
 	});
-	res.send(200);
 });
 
 // start server
