@@ -16,4 +16,4 @@ location, companion visual, etc).
 
 
 <dt><strong>jQuery</strong></dt>
-<dd>jQuery is used by Backbone to support events and templating. Version used is 1.11.</dd>
+<dd>Version used is 1.11.</dd>
