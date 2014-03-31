@@ -8,6 +8,7 @@ var http = require('http');
 var app = express();
 var httpClient = require('request');
 var fs = require('fs');
+var port;
 
 // Import the Station models
 var models = {
@@ -62,5 +63,6 @@ app.post('/request/station', function (req, res) {
 });
 
 // start server
-app.server.listen(3000);
-console.log('Listening on port 3000 in dev mode');
+port = process.env.PORT || 3000;
+app.server.listen(port);
+console.log('Listening on port ' + port + ' in dev mode');
