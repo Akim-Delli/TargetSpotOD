@@ -74,7 +74,9 @@ var tsod = (function () {
 			// Loop over the list of audio file name and create a new list item containing the file name
 			AudioList.forEach( function ( audio) {
 				if ( null !== audio) {
-					htmlList = htmlList + '<li class="list-group-item"><a href="/mp3/' + audio + '" target="_blank">' +  audio + '</a></li>';
+					htmlList = htmlList + '<a href="/mp3/' + audio + '" target="_blank">' +
+						'<li class="list-group-item"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-play"> </span></button>  ' 
+						+  audio + '</a>';
 				}
 				htmlList = htmlList + "</ul>";
 			})
